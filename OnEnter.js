@@ -12,3 +12,8 @@ document.getElementById('input').addEventListener("keyup",function(ev){
 
 document.getElementById("div_password").setAttribute("style","width:200px");
 // document.getElementById("div_password").setAttribute("position","width:500px");
+// document.addEventListener("keyup",function(ev){
+//     if(ev.keyCode==37){
+//         document.getElementById("square1").setAttribute("left",
+//     }
+// })
