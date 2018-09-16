@@ -2,27 +2,24 @@
    <head>
     <title>Test</title>
     <style>
-        #square1 {
-            width: 116px;height: 116px;
-            border: 2px solid #73AD21;
-            position: absolute;
-            top: 400px;
-            left: 400px;
-
+        body {
+            height: 800px;
+            width: 800px;
+            border: 1px solid yellowgreen;
+            background-color: black;
+        }
+        #target {
+            height: 50px;
+            width: 50px;
+            background-color: red;
+            position:absolute;
+            top: 9px;
+            left: 9px;
         }
     </style>
    </head>
-   <body>
-    <div>
-        <h1>Hello there</h1>
-        <div id="div_password">
-            <label>password:</label>
-            <input id="input" type='password'/>
-        </div>  
-    </div>
-    <div id="square1">
-        <img src="square1.png"/>
-    </div>
+   <body>    
+    <div id="target"></div><br /><br/><br/>
     <script src="OnEnter.js">
     </script>
    </body> 
