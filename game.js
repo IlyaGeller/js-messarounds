@@ -149,6 +149,48 @@ function Player() {
     }
 }
 
+
+function Enemy() {
+    this.element = null;
+    this.pos = {x:500, y: 330};
+    this.init = function(elem){
+        this.element = elem;
+        this.element.style["background-position-x"] = '0px';
+        this.element.style["transform"] = 'scaleX(' + (-1) + ')';
+        this.element.style["background-size"] = "800%";
+        this.element.style["transition"] = "left 200ms"
+    }
+    this.animateScript = function(){
+        const x = this.element.style.backgroundPositionX.split(' ')[0];
+        var nextX = parseInt(x);
+        nextX = parseInt(x) - 60;
+        this.element.style["background-position-x"] = nextX + 'px';
+    }
+    this.move = function(){
+        var nextX = this.pos.x - step_count*speed;
+    }
+    this.loop = function() {
+        setInterval(()=>{
+            this.element.style.left = this.pos.x +'px';
+            this.element.style.top = this.pos.y + 'px';
+            if(this.pos.x < -60){
+                this.element.style["transition"] = "";
+                this.pos.x = 860;
+                this.element.style["transition"] = "left 0ms";
+            }
+        },1000/60);
+        setInterval(()=>{
+            this.animateScript();
+        },100);
+        setInterval(()=>{
+            this.pos.x -= step_count*speed;
+        },200);
+    }
+}
 const player = new Player();
 player.init(document.getElementById("bg"),document.getElementById("target"));
 player.loop();
+
+const enemy = new Enemy();
+enemy.init(document.getElementById("enemy"));
+enemy.loop();

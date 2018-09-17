@@ -26,11 +26,23 @@
             position:absolute;
             transition: top 400ms ,left 200ms;
         }
+        #enemy {
+            background-image: url("tristan.png");
+            background-size: 200%;
+            background-repeat: repeat-x;
+            background-position-x: 0px;
+            height: 60px;
+            width: 60px;
+            position:absolute;
+            transition: left 200ms;
+            overflow: hidden;
+        }
     </style>
    </head>
    <body id="body"> 
     <div id="bg">
         <div id="target"></div><br /><br/><br/>
+        <div id="enemy"></div>
     </div>   
     <script src="game.js">
     </script>
