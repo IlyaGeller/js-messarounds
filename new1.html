@@ -3,7 +3,7 @@
     <title>Test</title>
     <style>
         body {
-            height: 288px;
+            height: 450px;
             width: 800px;
             /* border: 0px solid yellowgreen; */
             background-color: black;
@@ -13,21 +13,22 @@
             background-image: url("bg.jpg");
             background-repeat: repeat-x;
             background-size: cover;
-            height: 288px;
-            width: 512px;
+            height: 450px;
+            width: 800px;
         }
         #target {
-            height: 40px;
-            width: 40px;
-            background-color: red;
+            background-image: url("sprite.png");
+            background-size: cover;
+            background-repeat: repeat-x;
+            background-position-x: 0px;
+            height: 60px;
+            width: 60px;
             position:absolute;
-            top: 9px;
-            left: 9px;
-            transition: all 200ms;
+            transition: top 400ms ,left 200ms;
         }
     </style>
    </head>
-   <body> 
+   <body id="body"> 
     <div id="bg">
         <div id="target"></div><br /><br/><br/>
     </div>   
