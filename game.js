@@ -1,6 +1,6 @@
 const step_count = 1;
 var direction = 1;
-var speed = 20;
+var speed = 50;
 var tar = document.getElementById("target");
 document.getElementById("body").style.width = '800px';
 var MAP_WIDTH = document.getElementById("body").style.width.split('p')[0];
@@ -53,7 +53,7 @@ function Player() {
             }else{
                 playerOnLeftEnd = false;
             }  
-            if (this.pos.x >= PLAYER_MAP_END.RIGHT && keysDown[PLAYER_DIR.RIGHT]){
+            if (this.pos.x >= PLAYER_MAP_END.RIGHT && keysDown[PLAYER_DIR.RIGHT]||true){
                 playerOnRightEnd = true;
             }else{
                 playerOnRightEnd = false;
@@ -142,7 +142,7 @@ function Player() {
     this.animateScript = function(){
         const x = this.element.style.backgroundPositionX.split(' ')[0];
         var nextX = parseInt(x);
-        if(keysDown[PLAYER_DIR.LEFT]||keysDown[PLAYER_DIR.RIGHT]||keysDown[PLAYER_DIR.UP]){
+        if(keysDown[PLAYER_DIR.LEFT]||keysDown[PLAYER_DIR.RIGHT]||keysDown[PLAYER_DIR.UP]||true){
             nextX = parseInt(x) - 60;
         }
         this.element.style["background-position-x"] = nextX + 'px';
@@ -152,13 +152,13 @@ function Player() {
 
 function Enemy() {
     this.element = null;
-    this.pos = {x:500, y: 330};
+    this.pos = {x:500, y: 333};
     this.init = function(elem){
         this.element = elem;
         this.element.style["background-position-x"] = '0px';
         this.element.style["transform"] = 'scaleX(' + (-1) + ')';
         this.element.style["background-size"] = "800%";
-        this.element.style["transition"] = "left 200ms"
+        this.element.style["transition"] = "left 100ms"
     }
     this.animateScript = function(){
         const x = this.element.style.backgroundPositionX.split(' ')[0];
@@ -174,17 +174,20 @@ function Enemy() {
             this.element.style.left = this.pos.x +'px';
             this.element.style.top = this.pos.y + 'px';
             if(this.pos.x < -60){
-                this.element.style["transition"] = "";
-                this.pos.x = 860;
                 this.element.style["transition"] = "left 0ms";
+                console.log("left 0");
+                this.pos.x = 860;
+                setTimeout(() => {
+                    this.element.style["transition"] = "left 200ms";
+                }, 100);
             }
         },1000/60);
         setInterval(()=>{
             this.animateScript();
-        },100);
+        },150);
         setInterval(()=>{
             this.pos.x -= step_count*speed;
-        },200);
+        },150);
     }
 }
 const player = new Player();
