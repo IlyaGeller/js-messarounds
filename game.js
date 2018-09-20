@@ -24,11 +24,11 @@ const PLAYER_MAP_END = {
 };
 
 const SPRITES = {
-    IDLE : "url(jungle_idle.png)",
-    RUN : "url(jungle_run.png)",
-    JUMP : "url(jungle_jump.png)",
-    LANDING : "url(jungle_landing.png)",
-    MID_AIR : "url(jungle_mid_air.png)"
+    IDLE : "url(images/jungle_idle.png)",
+    RUN : "url(images/jungle_run.png)",
+    JUMP : "url(images/jungle_jump.png)",
+    LANDING : "url(images/jungle_landing.png)",
+    MID_AIR : "url(images/jungle_mid_air.png)"
 }
 function mapScrollDirection() {
     if(playerOnLeftEnd){

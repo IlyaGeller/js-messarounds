@@ -10,14 +10,16 @@
             margin: 0;
         }
         #bg {
-            background-image: url("bg.jpg");
+            background-image: url("images/bg.jpg");
             background-repeat: repeat-x;
             background-size: cover;
             height: 450px;
             width: 800px;
+            position: relative;
+            overflow: hidden;
         }
         #target {
-            background-image: url("sprite.png");
+            background-image: url("images/sprite.png");
             background-size: cover;
             background-repeat: repeat-x;
             background-position-x: 0px;
@@ -27,14 +29,13 @@
             transition: top 400ms ,left 200ms;
         }
         #enemy {
-            background-image: url("tristan.png");
+            background-image: url("images/tristan.png");
             background-size: 200%;
             background-repeat: repeat-x;
             background-position-x: 0px;
             height: 60px;
             width: 60px;
             position:absolute;
-            overflow: hidden;
         }
     </style>
    </head>
