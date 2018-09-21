@@ -46,50 +46,58 @@ function Player(){
     this.horizScale = 1;
     this.srcs = [
         "../images/red_idle.png",
+        "../images/red_idle_rev.png",
         "../images/red_run.png"
     ]
     this.srcNum = {
         IDLE : 0,
-        RUN : 1
+        IDLE_REV :1,
+        RUN : 2
     }
     this.minPositions = {
         IDLE : 28,
         RUN_0 : 61,
         RUN_1 : 124
     }
+    this.spriteIncrement = {
+        IDLE : 81.4,
+        RUN : 83
+    }
+    
+    var increment = this.spriteIncrement.IDLE;
     var image = new Image();
     image.src = this.srcs[this.srcNum.IDLE];
-    image.onload = function(){
-        ctx.drawImage(image,28,29,75,75,100,0,75,75);
-    }
+    // image.onload = function(){
+    //     ctx.drawImage(image,28,29,75,75,100,0,75,75);
+    // }
     this.spritePosition = this.minPositions.IDLE;
     this.x = 0;
     this.update = function(){
-        if(keysDown.LEFT || keysDown.RIGHT){
-            this.src = this.srcs[this.srcNum.RUN];
-        }else{
-            this.src = this.srcs[this.srcNum.IDLE];
-        }
         if (keysDown.LEFT && this.x > 0){
+            image.src = this.srcs[this.srcNum.IDLE_REV];
             this.x -= 10;
         }
         if (keysDown.RIGHT && this.x < innerWidth-75){
+            image.src = this.srcs[this.srcNum.IDLE];
             this.x += 10;
         }
-        this.spritePosition += 81.4;
+        this.spritePosition += increment;
         if(this.spritePosition > 928){
             this.spritePosition = this.minPositions.IDLE;
         }
         /**************************/
-        ctx.save();
-        ctx.translate(this.x,100);
-        ctx.scale(1,1);
-        ctx.drawImage(image,this.spritePosition,27,75,75,this.x,100,75,75);
+        ctx.save();;
+        ctx.drawImage(image,this.spritePosition,26,75,76,this.x,100,75,76);
         ctx.restore();
     }
 }
 
 var player = new Player();
+
+ctx.beginPath();
+ctx.moveTo(0,175);
+ctx.lineTo(800,175);
+ctx.stroke();
 
 function Circle(x, y, dx, dy, radius){
     this.x = x;
@@ -157,28 +165,32 @@ window.addEventListener("mouseup",function(ev){
 })
 
 
-// var circleArray = [];
-// for(var i=0; i<500; i++){
-//     var x = Math.random() * (canvas.width - (2*maxRadius)) + maxRadius;
-//     var y = Math.random() * (canvas.height - (2*maxRadius)) + maxRadius;
-//     var dx = (Math.random() - 0.5) * 5;
-//     var dy = (Math.random() - 0.5) * 5;
-//     var radius = Math.floor(Math.random() * (maxRadius/2) + 2);
-//     circleArray.push(new Circle(x,y,dx,dy,radius));
-// }
+var circleArray = [];
+for(var i=0; i<500; i++){
+    var x = Math.random() * (canvas.width - (2*maxRadius)) + maxRadius;
+    var y = Math.random() * (canvas.height - (2*maxRadius)) + maxRadius;
+    var dx = (Math.random() - 0.5) * 5;
+    var dy = (Math.random() - 0.5) * 5;
+    var radius = Math.floor(Math.random() * (maxRadius/2) + 2);
+    circleArray.push(new Circle(x,y,dx,dy,radius));
+}
 
-let TICKS = 60;
+let TICKS = 20;
 let lastTick = new Date().getTime();
 
 function animate(){
-    if((new Date().getTime() - lastTick) >= TICKS){
+    if((new Date().getTime() - lastTick) >= TICKS  || true){
         lastTick = new Date().getTime();
         ctx.clearRect(0,0,innerWidth,innerHeight);
-        // for(var i=0; i<circleArray.length ; i++){
-        //     circleArray[i].update();
-        // }
+        // ctx.beginPath();
+        // ctx.moveTo(0,176);
+        // ctx.lineTo(800,176);
+        // ctx.stroke();
+        for(var i=0; i<circleArray.length ; i++){
+            circleArray[i].update();
+        }
         
-        player.update();
+        // player.update();
     }
     requestAnimationFrame(animate);
 }
