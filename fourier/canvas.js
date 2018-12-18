@@ -27,13 +27,7 @@ var keysDown = {
 }
 
 
-
-ctx.beginPath();
-ctx.moveTo(0,175);
-ctx.lineTo(800,175);
-ctx.stroke();
-
-function Circle(x, y, dx, dy, radius){
+function Circle(x, y, dx, dy, radius,toFill){
     this.x = x;
     this.y = y;
     this.dx = dx;
@@ -53,7 +47,9 @@ function Circle(x, y, dx, dy, radius){
             ctx.fillStyle = this.fillStyle;
         }
         ctx.stroke();
-        ctx.fill();
+        if(toFill){
+            ctx.fill();
+        }
     }
 
     this.update = function(){
@@ -64,10 +60,10 @@ function Circle(x, y, dx, dy, radius){
             this.dy = -this.dy;
         }
 
-        if(mouse.down){
-            this.dx = (mouse.x - this.x)*0.01;
-            this.dy = (mouse.y - this.y)*0.01;
-        }
+        // if(mouse.down){
+        //     this.dx = (mouse.x - this.x)*0.01;
+        //     this.dy = (mouse.y - this.y)*0.01;
+        // }
         
         this.x += this.dx;
         this.y += this.dy;  
@@ -102,22 +98,24 @@ window.addEventListener("mousedown",function(ev){
 })
 window.addEventListener("mouseup",function(ev){
     mouse.down = false; 
-    circleArray.forEach(element => {
-        element.dx = (Math.random() - 0.5) * 5;
-        element.dy = (Math.random() - 0.5) * 5;
-    });
+    // circleArray.forEach(element => {
+    //     element.dx = (Math.random() - 0.5) * 5;
+    //     element.dy = (Math.random() - 0.5) * 5;
+    // });
 })
 
 
 var circleArray = [];
-for(var i=0; i<200; i++){
-    var x = Math.random() * (canvas.width - (2*maxRadius)) + maxRadius;
-    var y = Math.random() * (canvas.height - (2*maxRadius)) + maxRadius;
-    var dx = (Math.random() - 0.5) * 5;
-    var dy = (Math.random() - 0.5) * 5;
-    var radius = Math.floor(Math.random() * (maxRadius/2) + 2);
-    circleArray.push(new Circle(x,y,dx,dy,radius));
-}
+function setup(){
+    var x = canvas.width/2;
+    var y= canvas.height/2;
+    var radius = 100;
+    var dx = 0;
+    var dy = 0;
+    circleArray.push(new Circle(x,y,dx,dy,radius,false));
+
+};
+setup();
 
 let TICKS = 20;
 let lastTick = new Date().getTime();
